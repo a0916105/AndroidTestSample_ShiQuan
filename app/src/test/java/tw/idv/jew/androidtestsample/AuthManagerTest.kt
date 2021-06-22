@@ -1,10 +1,7 @@
 package tw.idv.jew.androidtestsample
 
-import io.mockk.MockKAnnotations
-import io.mockk.every
+import io.mockk.*
 import io.mockk.impl.annotations.MockK
-import io.mockk.mockk
-import io.mockk.verify
 import org.junit.After
 import org.junit.Assert
 import org.junit.Before
@@ -31,7 +28,12 @@ class AuthManagerTest {
 
         val result = authManager.login("123456", "12345678")
 
-        verify { loginService.login("123456", "12345678") }
+        verify(
+            ordering = Ordering.ORDERED
+        ){
+//            loginService.preLogin("123456", "12345678")
+            loginService.login("123456", "12345678")
+        }
         Assert.assertEquals(true, result)
     }
 }

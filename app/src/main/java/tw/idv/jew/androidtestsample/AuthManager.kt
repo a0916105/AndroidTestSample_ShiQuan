@@ -7,10 +7,16 @@ class AuthManager(private val loginService: ILoginService) {
 }
 
 interface ILoginService{
+    fun preLogin(account: String, password: String): Boolean
+
     fun login(account: String, password: String): Boolean
 }
 
 class LoginService : ILoginService{
+    override fun preLogin(account: String, password: String): Boolean {
+        return true
+    }
+
     override fun login(account: String, password: String): Boolean {
         if (account.length < 6){
             return false
