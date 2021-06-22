@@ -2,6 +2,7 @@ package tw.idv.jew.androidtestsample
 
 import io.mockk.*
 import io.mockk.impl.annotations.MockK
+import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert
 import org.junit.Before
@@ -21,20 +22,14 @@ class AuthManagerTest {
     }
 
     @Test
-    fun login() {
+    fun login() = runBlocking{
         val loginService = mockk<ILoginService>()
         val authManager = AuthManager(loginService)
-        every { loginService.login(any(), any()) } returns true
+        coEvery { loginService.login(any(), any()) } returns true
 
         val result = authManager.login("123456", "12345678")
 
-        verify(
-//            ordering = Ordering.ORDERED
-            exactly = 3
-        ){
-//            loginService.preLogin("123456", "12345678")
-            loginService.login("123456", "12345678")
-        }
+        coVerify{ loginService.login("123456", "12345678") }
         Assert.assertEquals(true, result)
     }
 }
