@@ -1,6 +1,8 @@
 package tw.idv.jew.androidtestsample
 
+import io.mockk.MockKAnnotations
 import io.mockk.every
+import io.mockk.impl.annotations.MockK
 import io.mockk.mockk
 import io.mockk.verify
 import org.junit.After
@@ -9,9 +11,12 @@ import org.junit.Before
 import org.junit.Test
 
 class AuthManagerTest {
+    @MockK
+    lateinit var loginService: ILoginService
 
     @Before
     fun setUp() {
+        MockKAnnotations.init(this)
     }
 
     @After
