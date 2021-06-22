@@ -1,11 +1,18 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
+
+    buildFeatures {
+        viewBinding true
+    }
 
     defaultConfig {
         applicationId "tw.idv.jew.androidtestsample"
@@ -33,6 +40,21 @@ android {
 }
 
 dependencies {
+    //Hilt
+    implementation "com.google.dagger:hilt-android:2.35.1"
+    kapt "com.google.dagger:hilt-android-compiler:2.35.1"
+    //Dagger
+    implementation 'com.google.dagger:dagger:2.35.1'
+    kapt 'com.google.dagger:dagger-compiler:2.35.1'
+    //Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    // Activity ktx
+    implementation 'androidx.activity:activity-ktx:1.2.3'
+    // RxJava3
+    implementation 'io.reactivex.rxjava3:rxjava:3.0.7'
+    // Android Scheduler for RxJava3
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.5.0'
