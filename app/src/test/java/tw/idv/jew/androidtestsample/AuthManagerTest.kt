@@ -29,7 +29,8 @@ class AuthManagerTest {
         val result = authManager.login("123456", "12345678")
 
         verify(
-            ordering = Ordering.ORDERED
+//            ordering = Ordering.ORDERED
+            exactly = 3
         ){
 //            loginService.preLogin("123456", "12345678")
             loginService.login("123456", "12345678")
