@@ -33,4 +33,15 @@ class AuthManagerTest {
         coVerify{ loginService.login("123456", "12345678") }
         Assert.assertEquals(true, result)
     }
+
+    @Test
+    fun testUtil(){
+        mockkStatic(Util::class)
+        every { Util.getString() } returns "b"
+
+        val result = Util.getString()
+
+        verify { Util.getString() }
+        assert(result == "b")
+    }
 }
