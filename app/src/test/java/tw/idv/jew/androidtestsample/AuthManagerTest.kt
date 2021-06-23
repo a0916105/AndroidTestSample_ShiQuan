@@ -26,6 +26,14 @@ class AuthManagerTest {
     }
 
     @Test
+    fun oriLogin() = runBlocking{
+        val loginService = LoginService()
+        val authManager = AuthManager(loginService)
+        val result = authManager.login("123456", "12345678")
+        Assert.assertEquals(true, result)
+    }
+
+    @Test
     fun login() = runBlocking{
 //        val loginService = mockk<ILoginService>()
 //        loginService = mockk<ILoginService>()
