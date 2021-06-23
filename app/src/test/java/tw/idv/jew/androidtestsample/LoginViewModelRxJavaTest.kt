@@ -16,6 +16,9 @@ class LoginViewModelRxJavaTest {
     @get:Rule
     val instantExecutorRule = InstantTaskExecutorRule()
 
+    @get:Rule
+    val rxSchedulerRule = RxSchedulerRule()
+
     private val repository = mockk<LoginRepository>(relaxed = true)
 
     @Before
