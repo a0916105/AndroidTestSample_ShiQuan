@@ -8,6 +8,7 @@ import org.junit.After
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
+import org.mockito.Mockito
 
 class AuthManagerTest {
 //    @MockK
@@ -30,6 +31,18 @@ class AuthManagerTest {
         val loginService = LoginService()
         val authManager = AuthManager(loginService)
         val result = authManager.login("123456", "12345678")
+        Assert.assertEquals(true, result)
+    }
+
+    @Test
+    fun mockLogin() = runBlocking{
+        val mockLoginService = Mockito.mock(ILoginService::class.java)
+        val authManager = AuthManager(mockLoginService)
+        Mockito.`when`(mockLoginService.login("123456", "12345678")).thenReturn(true)
+
+        val result = authManager.login("123456", "12345678")
+
+        Mockito.verify(mockLoginService).login("123456", "12345678")
         Assert.assertEquals(true, result)
     }
 
