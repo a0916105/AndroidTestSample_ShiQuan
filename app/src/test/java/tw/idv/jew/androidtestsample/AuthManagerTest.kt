@@ -35,6 +35,19 @@ class AuthManagerTest {
     }
 
     @Test
+    fun spyLogin() = runBlocking{
+        val loginService = spyk<ILoginService>(LoginService())
+        //val loginService = spyk(LoginService())   //This also works
+        val authManager = AuthManager(loginService)
+        coEvery { loginService.login(any(), any()) } returns true
+
+        val result = authManager.login("123456", "12345678")
+
+        coVerify{ loginService.login("123456", "12345678") }
+        Assert.assertEquals(true, result)
+    }
+
+    @Test
     fun testUtil(){
         mockkObject(Util)   //不用::class
 //        mockkStatic(Util::class)  //This will not work
