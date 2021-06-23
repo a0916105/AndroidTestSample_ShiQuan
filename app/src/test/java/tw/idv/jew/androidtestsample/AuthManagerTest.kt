@@ -8,14 +8,21 @@ import org.junit.After
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.mockito.Mock
 import org.mockito.Mockito
+import org.mockito.junit.MockitoJUnitRunner
 
+@RunWith(MockitoJUnitRunner::class)
 class AuthManagerTest {
 //    @MockK
 //    lateinit var loginService: ILoginService
 
     @SpyK
     var loginService = LoginService()
+
+    @Mock
+    lateinit var mockLoginService: ILoginService
 
     @Before
     fun setUp() {
@@ -36,7 +43,7 @@ class AuthManagerTest {
 
     @Test
     fun mockLogin() = runBlocking{
-        val mockLoginService = Mockito.mock(ILoginService::class.java)
+//        val mockLoginService = Mockito.mock(ILoginService::class.java)
         val authManager = AuthManager(mockLoginService)
         Mockito.`when`(mockLoginService.login("123456", "12345678")).thenReturn(true)
 
