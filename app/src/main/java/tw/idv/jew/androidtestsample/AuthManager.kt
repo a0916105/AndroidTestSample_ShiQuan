@@ -28,6 +28,8 @@ class LoginService : ILoginService{
 }
 
 object Util{
+    fun getString(): String = "1"
+
     @JvmStatic
-    fun getString(): String = "a"
+    fun getString2(): String = "2"
 }

@@ -36,7 +36,8 @@ class AuthManagerTest {
 
     @Test
     fun testUtil(){
-        mockkStatic(Util::class)
+        mockkObject(Util)   //不用::class
+//        mockkStatic(Util::class)  //This will not work
         every { Util.getString() } returns "b"
 
         val result = Util.getString()
