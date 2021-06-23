@@ -23,7 +23,8 @@ class AuthManagerTest {
 
     @Test
     fun login() = runBlocking{
-        val loginService = mockk<ILoginService>()
+//        val loginService = mockk<ILoginService>()
+        loginService = mockk<ILoginService>()
         val authManager = AuthManager(loginService)
         coEvery { loginService.login(any(), any()) } returns true
 
